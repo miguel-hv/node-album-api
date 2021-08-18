@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { DB_URL, DB_CONFIG } = require('../db');
 
-const Artist = require('../models/Artist');
+const Artist = require('../models/Artist.model');
 
 const artistsArray = [
     {
@@ -20,7 +20,7 @@ mongoose.connect(DB_URL, DB_CONFIG)
     
     const allArtists = await Artist.find();
 
-    if(allArtists.legth) {
+    if(allArtists.length) {
         await Artist.collection.drop();
         console.log('Artist collection dropped');  
     }
@@ -35,6 +35,4 @@ mongoose.connect(DB_URL, DB_CONFIG)
 .catch(error => {
     console.log('Error inserting artists: ', error);
 })
-.finally( ()=> {    
-    mongoose.disconnect();
-});
+.finally(()=> mongoose.disconnect());
