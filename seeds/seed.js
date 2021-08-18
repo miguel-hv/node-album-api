@@ -10,6 +10,12 @@ const artistsArray = [
         birthdate: null,
         deathdate: null,
     },
+    {
+        name : 'test2',
+        photoUrl: '',
+        birthdate: null,
+        deathdate: null,
+    },
 ];
 
 const artistDocuments = artistsArray.map(artist => new Artist(artist));

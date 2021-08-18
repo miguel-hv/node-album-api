@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.get('/all', controller.artistsGet);
-router.get('/:id', controller.artistGet);
+// router.get('/:id', controller.artistGet);
+router.post('/', controller.artistsPost);
 
 module.exports = router;

@@ -1,17 +1,21 @@
-const express = require("express");
-const db = require("./db.js");
-
-const Artist = require("./models/Artist.model");
+const express = require('express');
+const db = require('./db.js');
 
 const PORT = 3001;
+db.connect();
+
 const app = express();
 const router = express.Router();
 
 const artistsRoutes = require('./routes/artists.routes');
+const artistRoutes = require('./routes/artist.routes');
+const { urlencoded } = require('express');
 
-db.connect();
+app.use(express.json());
+app.use(urlencoded({ extended: false }));
 
 app.use("/artists", artistsRoutes);
+app.use("/artist", artistRoutes);
 
 router.get("/", (req, res) => {
     res.send("¡Hola mundo!");
