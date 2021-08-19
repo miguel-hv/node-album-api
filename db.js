@@ -9,6 +9,7 @@ const DB_CONFIG = {
 const connect = ()=> {    
     mongoose.connect(DB_URL, DB_CONFIG)
     .then(res => {
+        mongoose.set('useFindAndModify', false);
         const { name, host } = res.connection;
         console.log(`Successfully connected to ${name} in ${host}`);
     })

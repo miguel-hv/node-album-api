@@ -1,11 +1,12 @@
-const Artist = require('../models/Artist.model');
+const { findByIdAndDelete } = require("../models/Artist.model");
+const Artist = require("../models/Artist.model");
 
 const artistGet = async (req, res, next) => {
     const id = req.params.id;
-    console.log('id de url: ', id);
+    console.log("id de url: ", id);
     try {
         const artist = await Artist.findById(id);
-    console.log(artist);
+        console.log(artist);
 
         if (artist) {
             return res.status(200).json(artist);
@@ -22,7 +23,7 @@ const artistGet = async (req, res, next) => {
 const artistPost = async (req, res, next) => {
     try {
         const newArtist = new Artist({
-            name : req.body.name,
+            name: req.body.name,
             photoUrl: req.body.photoUrl,
             birthdate: req.body.birthdate,
             deathdate: req.body.deathdate,
@@ -30,13 +31,44 @@ const artistPost = async (req, res, next) => {
         const createdArtist = await newArtist.save();
         return res.status(200).json(createdArtist);
     } catch (err) {
-        console.log('artist post error: ', err);
-        res.status(400).json('The body of the request is not valid');
+        console.log("artist post error: ", err);
+        res.status(400).json("The body of the request is not valid");
         // return next(err);
     }
-}
+};
+
+const artistPut = async (req, res, next) => {
+    try {
+        const { id, ...update } = req.body;
+
+        const updatedArtist = await Artist.findByIdAndUpdate(
+            id,
+            update,
+            { new: true }
+        );
+
+        return res.status(200).json(updatedArtist);
+    } catch (err) {
+        console.log("artist update error: ", err);
+        res.status(400).json("The update was not done");
+        // return next(err);
+    }
+};
+
+const artistDelete = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const deletedArtist = await Artist.findByIdAndDelete(id);
+        return res.status(200).json(deletedArtist);
+    } catch (err) {
+        console.log('artist delete error');
+        res.status(400).json('The album could not be deleted');
+    }
+};
 
 module.exports = {
     artistGet,
     artistPost,
-}
+    artistPut,
+    artistDelete,
+};
