@@ -1,4 +1,4 @@
-const { findByIdAndDelete } = require("../models/Artist.model");
+// const { findByIdAndDelete } = require("../models/Artist.model");
 const Artist = require("../models/Artist.model");
 
 const artistGet = async (req, res, next) => {

@@ -9,6 +9,8 @@ const router = express.Router();
 
 const artistsRoutes = require('./routes/artists.routes');
 const artistRoutes = require('./routes/artist.routes');
+const albumsRoutes = require('./routes/albums.routes');
+const albumRoutes = require('./routes/album.routes');
 const { urlencoded } = require('express');
 
 app.use(express.json());
@@ -16,6 +18,8 @@ app.use(urlencoded({ extended: false }));
 
 app.use("/artists", artistsRoutes);
 app.use("/artist", artistRoutes);
+app.use("/album", albumRoutes);
+app.use("/albums", albumsRoutes);
 
 router.get("/", (req, res) => {
     res.send("¡Hola mundo!");
