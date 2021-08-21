@@ -2,7 +2,7 @@ const Album = require("../models/Album.model");
 
 const albumGet = async (req, res, next) => {
     try {
-        const id = req.body.id;
+        const id = req.params.id;
         const selectedAlbum = await Album.findById(id);
 
         if (selectedAlbum) {
@@ -35,7 +35,9 @@ const albumPost = async (req, res, next) => {
 
 const albumPut = async (req, res, next) => {
     try {
-        const { id, ...update } = req.body;
+        const { _id: id, ...update } = req.body;
+        console.log(req.body);
+        console.log('id: ',id);
 
         const updatedAlbum = await Album.findByIdAndUpdate(
             id, 
@@ -63,4 +65,5 @@ const albumDelete = async (req, res, next) => {
 module.exports = {
     albumGet,
     albumPost,
+    albumPut,
 };

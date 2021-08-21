@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require("../controllers/album.controller");
 
 router.get("/:id", controller.albumGet);
-// router.put("/:id", controller.albumsPut);
-// router.delete("/:id", controller.albumsDelete);
 router.post("/", controller.albumPost);
+router.put("/:id", controller.albumPut);
+// router.delete("/:id", controller.albumDelete);
 
 module.exports = router;
