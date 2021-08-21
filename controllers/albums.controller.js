@@ -16,10 +16,9 @@ const albumsGet = async (req, res, next) => {
 
 const albumsPost = async (req, res, next) => {
     try{
-        const newAlbums = req.body.map((album) => {
-            new Album(album);
-        });
-        return res.status(200).json(newAlbums);
+        const newAlbums = req.body.map(album => new Album(album));
+        const createdAlbums = await Album.insertMany(newAlbums);
+        return res.status(200).json(createdAlbums);
     } catch(err) {
         console.log(err);
         return res.status(400).json("The body of the request is not valid");
