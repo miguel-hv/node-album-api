@@ -53,7 +53,6 @@ const albumPut = async (req, res, next) => {
 const albumDelete = async (req, res, next) => {
     try {
         const id = req.params.id;
-        console.log("req.params en delete: ", req.params);
         deletedArtist = await Album.findByIdAndDelete(id);
         return res.status(200).json(deletedArtist);
     } catch (err) {
@@ -66,4 +65,5 @@ module.exports = {
     albumGet,
     albumPost,
     albumPut,
+    albumDelete,
 };
