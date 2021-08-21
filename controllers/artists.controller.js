@@ -15,12 +15,9 @@ const artistsPost = async (req, res, next) => {
     try {
         console.log(req.body);
 
-        const newArtists = req.body.map((artist) => {
-            console.log(artist);
-            return new Artist(artist);
-        });
+        const newArtists = req.body.map(artist => new Artist(artist));
 
-        console.log(newArtists);
+        // console.log(newArtists);
 
         await Artist.insertMany(newArtists);
 

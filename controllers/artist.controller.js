@@ -39,7 +39,8 @@ const artistPost = async (req, res, next) => {
 
 const artistPut = async (req, res, next) => {
     try {
-        const { id, ...update } = req.body;
+        const { _id: id, ...update } = req.body;
+        // const { id, ...update } = req.body;
 
         const updatedArtist = await Artist.findByIdAndUpdate(
             id,
