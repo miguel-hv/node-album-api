@@ -1,10 +1,28 @@
 const express = require('express');
 const db = require('./db.js');
+const cors = require('cors');
+const path = require('path');
 
 const PORT = 3001;
 db.connect();
 
 const app = express();
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.use(cors({
+    origin: ['http://localhost:4200'], //todo: add netlify name,
+    credentials: true, 
+}));
+
+// app.use(express.static(path.join(__dirname, 'public')));
+
+
 const router = express.Router();
 
 const artistsRoutes = require('./routes/artists.routes');
@@ -43,5 +61,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log("servidor a máxima potencia en puerto: ", PORT);
+    console.log("servidor a toda máquina en puerto: ", PORT);
 });
