@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const DB_URL = 'mongodb://localhost:27017/albums_api';
+// const DB_URL = 'mongodb://localhost:27018/albums_api';
 const DB_CONFIG = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
