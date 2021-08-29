@@ -13,6 +13,9 @@ const albumGet = async (req, res, next) => {
     } catch (err) {
         console.log(err);
         return res.status(400).json("The id is not a valid mongo ObjectId");
+        // const error = new Error('The id is not a valid mongo ObjectId');
+        // error.status = 400;
+        // return next(error);
     }
 };
 
@@ -30,6 +33,8 @@ const albumPost = async (req, res, next) => {
     } catch (err) {
         console.log(err);
         return res.status(400).json("The body of the request is not valid");
+        // error.status = 400;
+        // return next(error);
     }
 };
 
@@ -46,7 +51,11 @@ const albumPut = async (req, res, next) => {
         );
         return res.status(200).json(updatedAlbum);
     } catch (err) {
-        return res.status(400).json("The update was not done");
+        console.log(err)
+        // return res.status(400).json("The update was not done");
+        // const error = new Error('The update was not done');
+        err.status = 400;
+        return next(err);
     }
 };
 
@@ -58,6 +67,9 @@ const albumDelete = async (req, res, next) => {
     } catch (err) {
         console.log(err);
         return res.status(400).json("The album could not be deleted");
+        // const error = new Error('The album could not be deleted');
+        // error.status = 400;
+        // return next(error);
     }
 };
 

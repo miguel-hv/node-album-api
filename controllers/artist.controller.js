@@ -15,8 +15,10 @@ const artistGet = async (req, res, next) => {
         }
     } catch (error) {
         console.log("artists get error: ", error);
-        // return res.status(400).send("The id is not a valid mongo OjectId");
-        return next(error);
+        return res.status(400).send("The id is not a valid mongo ObjectId");
+        // const error = new Error('The id is not a valid mongo OjectId');
+        // error.status = 400;
+        // return next(error);
     }
 };
 
@@ -32,8 +34,11 @@ const artistPost = async (req, res, next) => {
         return res.status(200).json(createdArtist);
     } catch (err) {
         console.log("artist post error: ", err);
-        res.status(400).json("The body of the request is not valid");
+        return res.status(400).json("The body of the request is not valid");
         // return next(err);
+        // const error = new Error('The body of the request is not valid');
+        // error.status = 400;
+        // return next(error);
     }
 };
 
@@ -52,7 +57,10 @@ const artistPut = async (req, res, next) => {
     } catch (err) {
         console.log("artist update error: ", err);
         res.status(400).json("The update was not done");
-        // return next(err);
+        return next(err);
+        // const error = new Error('The album could not be deleted');
+        // error.status = 400;
+        // return next(error);
     }
 };
 
@@ -64,6 +72,9 @@ const artistDelete = async (req, res, next) => {
     } catch (err) {
         console.log('artist delete error');
         res.status(400).json('The album could not be deleted');
+        // const error = new Error('The album could not be deleted');
+        // error.status = 400;
+        // return next(error);
     }
 };
 

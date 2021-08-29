@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const db = require('./db.js');
 const cors = require('cors');
 const path = require('path');
 
-const PORT = 3001;
+const PORT =  process.env.PORT || 3000;
 db.connect();
 
 const app = express();
@@ -19,9 +20,6 @@ app.use(cors({
     origin: ['http://localhost:4200'], //todo: add netlify name,
     credentials: true, 
 }));
-
-// app.use(express.static(path.join(__dirname, 'public')));
-
 
 const router = express.Router();
 
@@ -39,13 +37,9 @@ app.use("/artist", artistRoutes);
 app.use("/album", albumRoutes);
 app.use("/albums", albumsRoutes);
 
-router.get("/", (req, res) => {
-    res.send("¡Hola mundo!");
-});
-
-router.get("/prueba", (req, res) => {
-    res.send("Esta es la página de prueba");
-});
+// router.get("/", (req, res) => {
+//     res.send("¡Hola mundo!");
+// });
 
 app.use("/", router);
 
